@@ -58,7 +58,8 @@ public class Startup extends SherlockFragmentActivity implements View.OnClickLis
             startDashboard();
         } else {
             requestQueue = Volley.newRequestQueue(this);
-            meRequest = RequestFactory.newMeRequest(this, new MeRequestListener(), new RequestErrorListener());
+            MeRequestListener requestListener = new MeRequestListener();
+            meRequest = RequestFactory.newMeRequest(this, requestListener, requestListener);
             setContentView(R.layout.login);
 
             loadingSwitcher = (ViewSwitcher) findViewById(R.id.main_loading_switcher);
@@ -141,26 +142,22 @@ public class Startup extends SherlockFragmentActivity implements View.OnClickLis
         requestQueue.add(meRequest);
     }
 
-    class RequestErrorListener implements Response.ErrorListener {
+    class MeRequestListener implements Response.ErrorListener, Response.Listener<MeResponse> {
 
         @Override
         public void onErrorResponse(VolleyError volleyError) {
-            Throwable cause = volleyError.getCause();
-            if (cause instanceof AuthFailureError) {
-                AuthFailureError authError = (AuthFailureError)cause;
-               if (authError.getResolutionIntent() != null) {
-                   startActivityForResult(authError.getResolutionIntent(), ACCOUNT_RETRY_REQ_CODE);
-                   return;
-               }
+            if (volleyError instanceof AuthFailureError) {
+                AuthFailureError authError = (AuthFailureError)volleyError;
+                if (authError.getResolutionIntent() != null) {
+                    startActivityForResult(authError.getResolutionIntent(), ACCOUNT_RETRY_REQ_CODE);
+                    return;
+                }
             }
 
-            Log.e(TAG, "Something broke getting /api/me", cause);
+            Log.e(TAG, "Something broke getting /api/me", volleyError);
             Toast.makeText(Startup.this, R.string.server_error, Toast.LENGTH_SHORT).show();
             stopLoading();
         }
-    }
-
-    class MeRequestListener implements Response.Listener<MeResponse> {
 
         @Override
         public void onResponse(MeResponse meResponse) {

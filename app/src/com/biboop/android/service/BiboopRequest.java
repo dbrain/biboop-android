@@ -1,7 +1,6 @@
 package com.biboop.android.service;
 
 import android.content.Context;
-import android.util.Log;
 import com.android.volley.*;
 import com.android.volley.toolbox.HttpHeaderParser;
 import com.biboop.android.auth.TokenHelper;
@@ -34,9 +33,18 @@ public class BiboopRequest<T> extends Request<T> {
     public Map<String, String> getHeaders() throws AuthFailureError {
         final HashMap<String, String> headers = new HashMap<String, String>(1);
         TokenResult tokenResult = tokenHelper.getToken();
-        if (tokenResult.action == TokenResult.GetTokenResultAction.OK) {
-            headers.put("Authorization", "Bearer " + tokenResult.token);
-            Log.d(TAG, "Token " + tokenResult.token);
+        switch (tokenResult.action) {
+            case OK:
+                headers.put("Authorization", "Bearer " + tokenResult.token);
+                break;
+            case RETRY_WITH_INTENT:
+                throw new AuthFailureError(tokenResult.retryIntent);
+            case AUTHENTICATION_FAILURE:
+                throw new AuthFailureError("Authentication failure", tokenResult.authFailureException);
+            case SERVER_ERROR:
+                throw new AuthFailureError("Authentication server error", tokenResult.serverException);
+            case RETRY_LIMIT_HIT:
+                throw new AuthFailureError("Ran out of retries", tokenResult.retryLimitHitAuthException);
         }
         return headers;
     }
