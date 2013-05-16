@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BiboopTheme" parent="Theme.Sherlock.Light">
+        <item name="actionBarStyle">@style/BiboopTheme.ActionBar</item>
+        <item name="actionModeStyle">@style/BiboopTheme.ActionMode</item>
+        <item name="android:actionBarStyle">@style/BiboopTheme.ActionBar</item>
+        <item name="android:actionModeStyle">@style/BiboopTheme.ActionMode</item>
+        <item name="homeAsUpIndicator">@drawable/menu_indicator</item>
+        <item name="android:homeAsUpIndicator">@drawable/menu_indicator</item>
+    </style>
+
+    <style name="BiboopTheme.ActionBar" parent="Widget.Sherlock.Light.ActionBar">
+        <item name="background">@color/actionbar_color</item>
+        <item name="android:background">@color/actionbar_color</item>
+        <item name="titleTextStyle">@style/actionbar_text</item>
+        <item name="android:titleTextStyle">@style/actionbar_text</item>
+    </style>
+
+    <style name="BiboopTheme.ActionMode" parent="Widget.Sherlock.Light.ActionMode">
+        <item name="background">@color/actionbar_color</item>
+        <item name="android:background">@color/actionbar_color</item>
+        <item name="titleTextStyle">@style/actionbar_text</item>
+        <item name="android:titleTextStyle">@style/actionbar_text</item>
+    </style>
+
+</resources>

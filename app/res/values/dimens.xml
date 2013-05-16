@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="shadow_width">15dp</dimen>
+    <dimen name="slidingmenu_offset">60dp</dimen>
+    <dimen name="avatar_height">40dp</dimen>
+    <dimen name="avatar_width">40dp</dimen>
+    <dimen name="avatar_margin">5dp</dimen>
+    <dimen name="hr_height">1dp</dimen>
+    <dimen name="user_name_margin_top">20dp</dimen>
+    <dimen name="user_name_margin_left">5dp</dimen>
+    <dimen name="menu_width">240dp</dimen>
+</resources>
