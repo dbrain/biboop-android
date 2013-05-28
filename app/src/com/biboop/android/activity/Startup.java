@@ -14,13 +14,12 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.biboop.android.R;
 import com.biboop.android.service.BiboopRequest;
 import com.biboop.android.service.RequestFactory;
 import com.biboop.android.service.response.MeResponse;
-import com.biboop.android.util.DefaultRequestFilters;
 import com.biboop.android.util.Preferences;
+import com.biboop.android.util.RequestQueueHolder;
 import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.AccountPicker;
 import com.google.android.gms.common.ConnectionResult;
@@ -30,6 +29,7 @@ import static com.google.android.gms.common.GooglePlayServicesUtil.*;
 
 public class Startup extends SherlockFragmentActivity implements View.OnClickListener {
     private static final String TAG = "Biboop.Startup";
+    private static final String ME_REQUEST_TAG = "MeRequest";
 
     private static final int SWITCHER_LOADING_POSITION = 1;
     private static final int SWITCHER_STARTING_POSITION = 0;
@@ -46,7 +46,7 @@ public class Startup extends SherlockFragmentActivity implements View.OnClickLis
     protected void onStop() {
         super.onStop();
         if (requestQueue != null) {
-            requestQueue.cancelAll(DefaultRequestFilters.ALL_REQUEST_FILTER);
+            requestQueue.cancelAll(ME_REQUEST_TAG);
         }
     }
 
@@ -57,10 +57,12 @@ public class Startup extends SherlockFragmentActivity implements View.OnClickLis
         if (prefs.isSignedIn()) {
             startDashboard();
         } else {
-            requestQueue = Volley.newRequestQueue(this);
+            setContentView(R.layout.login);
+
+            requestQueue = RequestQueueHolder.getInstance(this);
             MeRequestListener requestListener = new MeRequestListener();
             meRequest = RequestFactory.newMeRequest(this, requestListener, requestListener);
-            setContentView(R.layout.login);
+            meRequest.setTag(ME_REQUEST_TAG);
 
             loadingSwitcher = (ViewSwitcher) findViewById(R.id.main_loading_switcher);
 

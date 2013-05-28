@@ -8,13 +8,14 @@ import android.preference.PreferenceManager;
 import com.biboop.android.model.GoogleUser;
 
 public class Preferences {
-    private static final String DEFAULT_API_HOST = "https://biboop-web.appspot.com";
+    private static final String DEFAULT_API_HOST = "http://192.168.43.248:8080";
 
     private static final String KEY_API_HOST = "apiHost";
     private static final String KEY_ACCOUNT_NAME = "accountName";
     private static final String KEY_SIGNED_IN = "signedIn";
     private static final String GOOGLE_USER_NAME = "fullName";
     private static final String GOOGLE_USER_AVATAR = "avatar";
+    private static final String GOOGLE_USER_EMAIL = "email";
 
     private final SharedPreferences prefs;
     private static Preferences instance;
@@ -61,6 +62,7 @@ public class Preferences {
             final SharedPreferences.Editor editor = prefs.edit();
             editor.putString(GOOGLE_USER_NAME, googleUser.name);
             editor.putString(GOOGLE_USER_AVATAR, googleUser.picture);
+            editor.putString(GOOGLE_USER_EMAIL, googleUser.email);
             save(editor);
         }
     }
@@ -71,6 +73,10 @@ public class Preferences {
 
     public String getUserAvatarUrl() {
         return prefs.getString(GOOGLE_USER_AVATAR, null);
+    }
+
+    public String getUserEmail() {
+        return prefs.getString(GOOGLE_USER_EMAIL, null);
     }
 
     @SuppressLint("NewApi")

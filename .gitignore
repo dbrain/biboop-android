@@ -1,3 +1,11 @@
 out
 .idea/workspace.xml
 app/local.properties
+app/bin
+app/gen
+libs/play-services-v7/bin
+libs/play-services-v7/gen
+libs/play-services-v7/local.properties
+libs/ActionBarSherlock-v4.3.1/bin
+libs/ActionBarSherlock-v4.3.1/gen
+libs/ActionBarSherlock-v4.3.1/local.properties
