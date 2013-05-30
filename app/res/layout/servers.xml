@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<ViewSwitcher xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-  <TextView
+  <include layout="@layout/generic_loading"/>
+
+  <ListView
+    android:id="@+id/server_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:text="@string/servers"
-    android:gravity="center"/>
+    android:background="@color/card_background_color"
+    android:cacheColorHint="@color/card_background_color"
+    android:listSelector="@null"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="@dimen/card_divider_height"
+    android:paddingLeft="@dimen/card_side_padding"
+    android:paddingRight="@dimen/card_side_padding"
+    android:paddingTop="@dimen/card_divider_height"
+    android:clipToPadding="false"/>
 
-</LinearLayout>
+</ViewSwitcher>

@@ -57,7 +57,6 @@ public class BiboopRequest<T> extends Request<T> {
     @Override
     protected Response<T> parseNetworkResponse(NetworkResponse response) {
         try {
-            String jsonString = new String(response.data, HttpHeaderParser.parseCharset(response.headers));
             T body = JSONMapper.getInstance().readValue(response.data, typeClass);
             return Response.success(body, HttpHeaderParser.parseCacheHeaders(response));
         } catch (Exception e) {

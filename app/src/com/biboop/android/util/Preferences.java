@@ -8,14 +8,18 @@ import android.preference.PreferenceManager;
 import com.biboop.android.model.GoogleUser;
 
 public class Preferences {
-    private static final String DEFAULT_API_HOST = "http://192.168.43.248:8080";
+    private static final String DEFAULT_API_HOST = "https://biboop-web.appspot.com";
+    private static final long DEFAULT_POLL_AGE_ERROR = 600000;
+    private static final long DEFAULT_POLL_AGE_WARN = 300000;
 
     private static final String KEY_API_HOST = "apiHost";
     private static final String KEY_ACCOUNT_NAME = "accountName";
     private static final String KEY_SIGNED_IN = "signedIn";
-    private static final String GOOGLE_USER_NAME = "fullName";
-    private static final String GOOGLE_USER_AVATAR = "avatar";
-    private static final String GOOGLE_USER_EMAIL = "email";
+    private static final String KEY_GOOGLE_USER_NAME = "fullName";
+    private static final String KEY_GOOGLE_USER_AVATAR = "avatar";
+    private static final String KEY_GOOGLE_USER_EMAIL = "email";
+    private static final String KEY_POLL_AGE_ERROR = "pollAgeError";
+    private static final String KEY_POLL_AGE_WARN = "pollAgeWarn";
 
     private final SharedPreferences prefs;
     private static Preferences instance;
@@ -53,6 +57,14 @@ public class Preferences {
         return prefs.getString(KEY_API_HOST, DEFAULT_API_HOST);
     }
 
+    public long getPollErrorAge() {
+        return prefs.getLong(KEY_POLL_AGE_ERROR, DEFAULT_POLL_AGE_ERROR);
+    }
+
+    public long getPollWarnAge() {
+        return prefs.getLong(KEY_POLL_AGE_WARN, DEFAULT_POLL_AGE_WARN);
+    }
+
     public void setApiHost(String apiHost) {
         save(prefs.edit().putString(KEY_API_HOST, apiHost));
     }
@@ -60,23 +72,23 @@ public class Preferences {
     public void setGoogleUser(GoogleUser googleUser) {
         if (googleUser != null) {
             final SharedPreferences.Editor editor = prefs.edit();
-            editor.putString(GOOGLE_USER_NAME, googleUser.name);
-            editor.putString(GOOGLE_USER_AVATAR, googleUser.picture);
-            editor.putString(GOOGLE_USER_EMAIL, googleUser.email);
+            editor.putString(KEY_GOOGLE_USER_NAME, googleUser.name);
+            editor.putString(KEY_GOOGLE_USER_AVATAR, googleUser.picture);
+            editor.putString(KEY_GOOGLE_USER_EMAIL, googleUser.email);
             save(editor);
         }
     }
 
     public String getUserFullName() {
-        return prefs.getString(GOOGLE_USER_NAME, "Biboop User");
+        return prefs.getString(KEY_GOOGLE_USER_NAME, "Biboop User");
     }
 
     public String getUserAvatarUrl() {
-        return prefs.getString(GOOGLE_USER_AVATAR, null);
+        return prefs.getString(KEY_GOOGLE_USER_AVATAR, null);
     }
 
     public String getUserEmail() {
-        return prefs.getString(GOOGLE_USER_EMAIL, null);
+        return prefs.getString(KEY_GOOGLE_USER_EMAIL, null);
     }
 
     @SuppressLint("NewApi")

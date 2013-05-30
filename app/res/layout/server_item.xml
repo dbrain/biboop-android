@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:background="@drawable/card_bg">
+
+  <View
+    android:id="@+id/serverState"
+    android:layout_width="match_parent"
+    android:layout_height="5dp"
+    android:background="@color/yellow_card_highlight"/>
+
+  <TextView
+    android:id="@+id/serverName"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/serverState"
+    android:paddingLeft="@dimen/card_inner_padding_side"
+    android:paddingRight="@dimen/card_inner_padding_side"
+    android:paddingTop="@dimen/card_inner_padding_top"
+    style="@style/card_title"/>
+
+  <TextView
+    android:id="@+id/lastSeen"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/serverName"
+    android:paddingLeft="@dimen/card_inner_padding_side"
+    android:paddingRight="@dimen/card_inner_padding_side"
+    style="@style/card_italic_subtitle"/>
+
+  <TextView
+    android:id="@+id/serverDescription"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="@dimen/card_inner_padding_side"
+    android:paddingRight="@dimen/card_inner_padding_side"
+    style="@style/card_subtitle"
+    android:layout_below="@id/lastSeen"/>
+
+  <View
+    android:id="@+id/divider"
+    android:layout_width="match_parent"
+    android:layout_height="1dp"
+    android:background="#e9e9e9"
+    android:layout_below="@id/serverDescription"
+    android:layout_marginTop="15dp"
+    android:layout_marginLeft="@dimen/card_inner_padding_side_minor"
+    android:layout_marginRight="@dimen/card_inner_padding_side_minor"/>
+
+  <LinearLayout
+    android:orientation="horizontal"
+    android:id="@+id/buttons"
+    android:layout_below="@id/divider"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+      android:id="@+id/run_command"
+      android:layout_width="0dp"
+      android:layout_height="40dp"
+      android:text="@string/run_command_card"
+      android:layout_weight="0.5"
+      android:gravity="center_vertical"
+      android:paddingTop="5dp"
+      android:paddingLeft="@dimen/card_inner_padding_side"
+      android:paddingRight="@dimen/card_inner_padding_side"
+      style="@style/card_link_text"/>
+
+    <View
+      android:layout_width="1dp"
+      android:layout_height="match_parent"
+      android:background="#e9e9e9"/>
+
+    <TextView
+      android:id="@+id/run_command"
+      android:layout_width="0dp"
+      android:layout_height="40dp"
+      android:layout_weight="0.5"
+      android:text="@string/more_card"
+      android:gravity="center_vertical"
+      android:paddingTop="5dp"
+      android:paddingLeft="@dimen/card_inner_padding_side"
+      android:paddingRight="@dimen/card_inner_padding_side"
+      style="@style/card_link_text"/>
+  </LinearLayout>
+
+</RelativeLayout>

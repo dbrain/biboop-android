@@ -4,4 +4,12 @@
   <color name="divider_color">#3A3A3A</color>
   <color name="menu_color">#555555</color>
   <color name="menu_item_selected">#9933b5e5</color>
+  <color name="card_background_color">#eeeeee</color>
+  <color name="card_border_color">#dddddd</color>
+  <color name="card_title_color">#777</color>
+  <color name="card_subtitle_color">#888</color>
+  <color name="card_link_color">#33b5e5</color>
+  <color name="green_card_highlight">#4400ff00</color>
+  <color name="red_card_highlight">#44ff0000</color>
+  <color name="yellow_card_highlight">#44ffff00</color>
 </resources>
