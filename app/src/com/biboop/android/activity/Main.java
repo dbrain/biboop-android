@@ -1,5 +1,6 @@
 package com.biboop.android.activity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -10,12 +11,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockFragmentActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.biboop.android.R;
 import com.biboop.android.adapter.MenuAdapter;
 import com.biboop.android.fragment.*;
+import com.biboop.android.util.Preferences;
 
 public class Main extends SherlockFragmentActivity implements AdapterView.OnItemClickListener {
     private DrawerLayout drawerLayout;
@@ -114,7 +117,11 @@ public class Main extends SherlockFragmentActivity implements AdapterView.OnItem
                 fragment = new Commands();
                 break;
             case SIGN_OUT:
-                // TODO Sign in
+                Preferences.getPreferences(this).setSignedIn(false);
+                startActivity(new Intent(this, Startup.class));
+                finish();
+                overridePendingTransition(0, 0);
+                Toast.makeText(this, R.string.signed_out, Toast.LENGTH_SHORT).show();
                 return;
         }
         FragmentManager fragmentManager = getSupportFragmentManager();

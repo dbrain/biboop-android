@@ -20,4 +20,5 @@
   <string name="run_command_card">Run command&#8230;</string>
   <string name="more_card">More&#8230;</string>
   <string name="last_seen">Last seen %1$s</string>
+  <string name="signed_out">Signed out.</string>
 </resources>
